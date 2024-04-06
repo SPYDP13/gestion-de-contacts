@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Acceuil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="content" [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<!--
+  <div id="container">
+    <strong>Ready to create an app?</strong>
+    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  </div>
+-->
+
+<ion-grid id="grid">
+  <ion-row id="row1">
+    <ion-col>
+      <div class="ion-text-center">
+        <ion-label class=" container fw-bold ion-text-center titre" color="light">
+          Bienvenue dans l'application de gestion des contacts
+        </ion-label>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row id="row2">
+    <ion-col class="ion-text-center">
+      <ion-button class="connexionBtn" routerLink="/connexion">
+        <ion-icon slot="start" name="log-in-outline"></ion-icon>
+        Connexion
+      </ion-button>
+      <ion-button class="inscriptionBtn" routerLink="/inscription">
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        Inscription
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+
+</ion-content>

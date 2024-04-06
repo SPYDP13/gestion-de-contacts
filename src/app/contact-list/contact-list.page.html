@@ -1,0 +1,244 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="p-2">
+    <ion-title>Liste des contacts</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" ></ion-back-button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+  <ion-fab id="add_contact" vertical="center" horizontal="end" [edge]="true">
+    <ion-fab-button (click)="addContactAlert()" id="addFabtn">
+      <ion-icon name="add"> </ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <ion-fab vertical="center" horizontal="end">
+    <ion-fab-button color="success" id="add_contact">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="bottom">
+      <ion-fab-button routerLink="/group-manage">
+        <ion-icon name="people-circle-outline" color="primary"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button id="update" routerLink="/update-user">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button (click)="deconnectAccountDialog()">
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button (click)="deleteAccountDialog()">
+        <ion-icon name="trash" color="danger"></ion-icon>
+      </ion-fab-button>
+
+    </ion-fab-list>
+    <ion-fab-list side="start">
+      <ion-button>
+        {{ UserNom }} {{ UserPrenom }}
+        <ion-icon slot="start" name="person"></ion-icon>
+      </ion-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-header>
+
+<ion-content id="mainContent" [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Liste des contacts</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+
+
+
+
+<ion-grid id="grid" class="mt-3">
+  <ion-row id="row1">
+    <ion-col>
+      <div class="ion-text-start">
+        <ion-label class=" container fw-bold ion-text-center" color="dark">
+        </ion-label>
+      </div>
+    </ion-col>
+    <ion-col>
+      <div class="ion-text-center mt-1">
+        <ion-label class=" container fw-bold ion-text-center text-decoration-underline" color="dark">
+          Gerer Facilement vos contacts avec notre logiciel
+        </ion-label>
+
+        <ion-searchbar show-clear-button="focus" (ionInput)="handleSearch($event)" placeholder="Rechercher"></ion-searchbar>
+      </div>
+    </ion-col>
+    <ion-col>
+
+    </ion-col>
+  </ion-row>
+
+
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-grid class="bg-light w-100" >
+        <ion-row>
+          <ion-col>
+            <ion-card-title class="fw-bold text-decoration-underline">Liste des contacts</ion-card-title>
+            <ion-card-subtitle> ... </ion-card-subtitle>
+          </ion-col>
+          <ion-col class="ion-text-center container">
+            <ion-button id="ouvrirOptionTri" color="medium" style="width: 150px; text-transform: none;"> Trier <ion-icon name=""></ion-icon> <ion-icon name="funnel"></ion-icon> </ion-button>
+            <ion-button id="ouvrirOptionGrouper" color="medium" style="width: 150px; text-transform: none;">Grouper <ion-icon name=""></ion-icon> <ion-icon name="people-outline"></ion-icon></ion-button>
+
+          </ion-col>
+
+          <ion-col>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card-header>
+
+    <ion-card-content class="ion-text-center ">
+
+      <ion-row class="ion-text-center w-100">
+        <ion-list [inset]="true" class="w-100">
+          <ion-item>
+            <ion-grid [fixed]="true" class="w-100">
+              <ion-row>
+                <ion-col size="auto" id="ionColHeader"> <div style="width: 100px">N°</div></ion-col>
+                <ion-col id="ionColHeader">Contact</ion-col>
+                <ion-col id="ionColHeader">Nom</ion-col>
+                <ion-col id="ionColHeader">Prénom</ion-col>
+                <ion-col id="ionColHeader">Groupe</ion-col>
+                <ion-col id="ionColHeader">Operations</ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+
+          <ion-item>
+            <ion-grid [fixed]="true">
+              <ion-label *ngIf="contactListFiltered.length==0 && !loading" class="ion-text-center">{{ searchResultText }}</ion-label>
+
+              <ion-row *ngIf="loading">
+                <ion-col>
+                  <ion-skeleton-text [animated]="true" style="width: 100%;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 40%;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+                </ion-col>
+                <ion-col>
+                  <ion-skeleton-text [animated]="true" style="width: 100%;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 40%;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+                </ion-col>
+                <ion-col>
+                  <ion-skeleton-text [animated]="true" style="width: 100%;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 40%;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+                </ion-col>
+                <ion-col>
+                  <ion-skeleton-text [animated]="true" style="width: 100%;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 40%;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+                </ion-col>
+                <ion-col>
+                  <ion-skeleton-text [animated]="true" style="width: 100%;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 40%;"></ion-skeleton-text>
+                  <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+                </ion-col>
+              </ion-row>
+
+
+              <ion-row *ngFor="let contact of contactListFiltered; let i=index">
+                <ion-col size="auto" id="ionColBody"> <div style="width: 100px">{{ i+1 }}</div></ion-col>
+                <ion-col id="ionColBody">{{ contact.contact }}</ion-col>
+                <ion-col id="ionColBody">{{ contact.nom }}</ion-col>
+                <ion-col id="ionColBody">{{ contact.prenom }}</ion-col>
+                <ion-col id="ionColBody">{{ contact.groupe.name }}</ion-col>
+                <ion-col id="ionColBody">
+                  <ion-grid>
+                    <ion-row>
+
+                      <ion-col>
+                        <ion-button (click)="view(contact.nom, contact.prenom, contact.contact, contact.groupe)" color="success">
+                          <ion-icon name="eye"></ion-icon>
+                        </ion-button>
+                      </ion-col>
+
+                      <ion-col>
+                        <ion-button (click)="updateAlert(contact.nom, contact.contact, contact.prenom, contact.groupe, i, contact.id)">
+                          <ion-icon name="pencil"></ion-icon>
+                        </ion-button>
+                      </ion-col>
+
+                      <ion-col>
+                        <ion-button (click)="delete(i,contact.id)" color="danger">
+                          <ion-icon name="trash"></ion-icon>
+                        </ion-button>
+                      </ion-col>
+
+                    </ion-row>
+                  </ion-grid>
+                </ion-col>
+              </ion-row>
+
+            </ion-grid>
+          </ion-item>
+
+        </ion-list>
+      </ion-row>
+
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-grid>
+
+<!-- Alerts -->
+
+<ion-alert
+[isOpen]="deleteOpen"
+class="custom-alert "
+trigger="delete_contact"
+backdropDismiss="false"
+(didDismiss)="setDeleteOpen(false)"
+header="Voulez-vous réellement supprimer le contact ?"
+[buttons]="alertButtonsDelete">
+</ion-alert>
+
+<ion-alert
+[isOpen]="viewOpen"
+class="custom-alert "
+trigger="view_contact"
+backdropDismiss="false"
+(didDismiss)="setViewOpen(false)"
+[header]="contactNom + ' ' + contactPrenom"
+[subHeader]="contactContact"
+[message]="'Group: ' + contactGroup"
+[buttons]="alertButtonsView">
+
+</ion-alert>
+
+<!-- Toast-->
+<ion-toast
+[isOpen]="isDeleteToastOpen"
+[message]="toastDeleteText"
+[duration]="3000"
+(didDismiss)="setDeleteToastOpen(false)"
+></ion-toast>
+
+<!-- picker -->
+
+<ion-picker trigger="ouvrirOptionTri" [columns]="optionTriColumns" [buttons]="optionTriButtons"></ion-picker>
+
+<ion-picker trigger="ouvrirOptionGrouper" [columns]="optionGroupColumns" [buttons]="optionGroupButtons"></ion-picker>
+
+
+
+</ion-content>

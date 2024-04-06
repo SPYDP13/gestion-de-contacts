@@ -1,0 +1,104 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Inscription</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Inscription</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-card class="container p-0 w-75 mt-5">
+    <ion-card-header id="cardHeader" class="shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+      <ion-card-title class="badge text-bg-primary text-dark fs-5" style="width: 7rem;">Inscrivez-vous</ion-card-title>
+      <ion-card-subtitle>Inscrivez-vous pour acceder à nos services!</ion-card-subtitle>
+    </ion-card-header>
+
+
+    <ion-card-content>
+
+      <ion-list>
+        <ion-grid id="grid">
+          <ion-row id="row1">
+            <ion-col id="loginImg" class="bg-body-tertiary">
+              <img alt="login Image" src="../../assets/image/signupbg.jpg" />
+            </ion-col>
+
+            <ion-col id="login" class="bg-body-tertiary">
+
+              <ion-list id="emailData">
+                <ion-item>
+                  <ion-input [(ngModel)]="nom" labelPlacement="floating" type="text" placeholder="">
+                    <div slot="label">Nom <ion-text color="danger">(obligatoire)</ion-text></div>
+                  </ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-input [(ngModel)]="prenom" labelPlacement="floating" type="text" placeholder="">
+                    <div slot="label">Prénom <ion-text color="danger">(obligatoire)</ion-text></div>
+                  </ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-input [(ngModel)]="email" labelPlacement="floating" type="email" placeholder="nom@gmail.com">
+                    <div slot="label">Email <ion-text color="danger">(obligatoire)</ion-text></div>
+                  </ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-input [(ngModel)]="password" labelPlacement="floating" type="password" placeholder="Mot de passe">
+                    <div slot="label">Mot de passe <ion-text color="danger">(obligatoire)</ion-text></div>
+                  </ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-input [(ngModel)]="confirmPassword" labelPlacement="floating" type="password" placeholder="Mot de passe">
+                    <div slot="label">Confirmation du mot de passe <ion-text color="danger">(obligatoire)</ion-text></div>
+                  </ion-input>
+                </ion-item>
+
+
+              </ion-list>
+              <div class="ion-text-center" id="emailButton">
+                <ion-button (click)="startInscription()" class="mb-3">Valider</ion-button>
+              </div>
+
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-end mt-3 fw-bold">
+            <ion-text>
+              Vous avez deja un compte???
+            </ion-text>
+          </ion-col>
+          <ion-col>
+            <ion-button color="success" routerLink="/connexion">
+              Connectez-vous
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+
+
+<!-- Toast-->
+<ion-toast
+[isOpen]="isToastOpen"
+[message]="toastText"
+[duration]="3000"
+(didDismiss)="setToastOpen(false)"
+></ion-toast>
+
+
+</ion-content>
